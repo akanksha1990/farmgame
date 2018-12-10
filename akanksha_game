@@ -1,0 +1,164 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<p id="gamestatus"></p>
+<form name="game" method="POST" action="">
+<input type="hidden" name="btncount" id="btncount" value="">
+<input type="hidden" alt="false" class="alivestatus" name="farmer_alivestatus" id="farmer_alivestatus" value="1">
+<input type="hidden" alt="false"  class="alivestatus" name="cow1_alivestatus" id="cow1_alivestatus" value="1">
+<input type="hidden"  alt="false" class="alivestatus" name="cow2_alivestatus" id="cow2_alivestatus" value="1">
+<input type="hidden"  alt="false"  class="alivestatus" name="bunny1_alivestatus" id="bunny1_alivestatus" value="1">
+<input type="hidden" alt="false" class="alivestatus" name="bunny2_alivestatus" id="bunny2_alivestatus" value="1">
+<input type="hidden" alt="false" class="alivestatus" name="bunny3_alivestatus" id="bunny3_alivestatus" value="1">
+<input type="hidden" alt="false"  class="alivestatus" name="bunny4_alivestatus" id="bunny4_alivestatus" value="1">
+<input type="button" name="countfeed" id="countfeed" value="Submit" onclick="CountFun();">
+<input type="button" name="restartfeed" id="restartfeed" value="Restart Game" onclick="resetFun();">
+</form>
+<script>   
+ var cnt=0;
+ var randomArray = [ 'farmer_alivestatus','cow1_alivestatus','cow2_alivestatus','bunny1_alivestatus', 'bunny2_alivestatus', 'bunny3_alivestatus','bunny4_alivestatus'];
+ //Function to reset game
+ function resetFun(){
+	$('.alivestatus').attr('alt','false');
+    $('#countfeed').removeAttr('disabled');
+ }
+
+ //Function to play game and feed elements randomly
+ function CountFun(){
+	var farmer =$('#farmer_alivestatus').attr('alt');
+	var cow1 =$('#cow1_alivestatus').attr('alt');
+	var cow2 =$('#cow2_alivestatus').attr('alt');
+	var bunny1 =$('#bunny1_alivestatus').attr('alt');
+	var bunny2 =$('#bunny2_alivestatus').attr('alt');
+	var bunny3 =$('#bunny3_alivestatus').attr('alt');
+	var bunny4 =$('#bunny4_alivestatus').attr('alt');
+	//var cntelements=$(".alivestatus[value='1']").length;
+	var cntelements=randomArray.length;
+	$('#gamestatus').html('');
+	cnt=parseInt(cnt)+parseInt(1);
+	var rand =Math.floor(Math.random() * cntelements);
+	  console.log(rand+'    '+cnt+'     '+cntelements+'    random      ');
+	  if(cnt<=50){
+		  console.log(randomArray);
+		  for(var index in randomArray) {
+					if(rand==index){
+					  console.log(randomArray[index]);
+					   $('#'+randomArray[index]).attr('alt','true');
+					}
+			}
+	  //FARMER CASE STARTS HERE
+		 if((cnt%15)==0){
+		   if(farmer=='true'){
+				  $('#farmer_alivestatus').attr('alt','false');//farmer=false;
+			 }
+			 
+			 else{
+				 console.log('farmer dead');
+				 $('#gamestatus').html('GAME OVER!' + farmer);
+				 $('#countfeed').attr('disabled','disabled');
+				 return false;
+			 }
+		 }
+		//FARMER CASE ENDS HERE
+		
+		//COW1 CASE STARTS HERE
+		if((cnt%10)==0 && (($.inArray('cow1_alivestatus', randomArray))>-1)){
+			 if(cow1=='true'){
+			 //cow1=false;
+			 $('#cow1_alivestatus').attr('alt','false');
+		 }
+		 else{
+			  console.log('cow1 dead');
+			  $('#cow1_alivestatus').attr('alt','false');
+			  randomArray.splice($.inArray('cow1_alivestatus', randomArray),1);
+		 }
+		
+		}
+		
+		
+		
+		if((cnt%10)==0 && (($.inArray('cow2_alivestatus', randomArray))>-1)){
+			
+		 if(cow2=='true'){
+			 //cow2=false;
+			  $('#cow2_alivestatus').attr('alt','false');
+		 }
+		 else{
+			  console.log('cow2 dead');
+			   $('#cow2_alivestatus').attr('alt','false');
+			 randomArray.splice($.inArray('cow2_alivestatus', randomArray),1);
+		 }
+		}
+	   
+	   
+	   //COW2 CASE ENDS HERE
+	   
+	   
+	   
+	   //BUNNY CASE STARTS HERE
+	   if((cnt%8)==0 && (($.inArray('bunny1_alivestatus', randomArray))>-1)){
+		  
+		if(bunny1=='true'){
+			 //bunny1=false;
+			  $('#bunny1_alivestatus').attr('alt','false');
+		 }
+		 else{
+			  console.log('bunny1 dead');
+			  $('#bunny1_alivestatus').attr('alt','false');
+			  randomArray.splice($.inArray('bunny1_alivestatus', randomArray),1);
+		 }
+	   }
+	   if((cnt%8)==0 && (($.inArray('bunny2_alivestatus', randomArray))>-1)){
+		 
+		 if(bunny2=='true'){
+			 //bunny2=false;
+			  $('#bunny2_alivestatus').attr('alt','false');
+		 }
+		 else{
+			  console.log('bunny2 dead');
+			  $('#bunny2_alivestatus').attr('alt','false');
+			  randomArray.splice($.inArray('bunny2_alivestatus', randomArray),1);
+		 }
+	   }
+		 
+		 if((cnt%8)==0 && (($.inArray('bunny3_alivestatus', randomArray))>-1)){
+			 console.log($.inArray('bunny3_alivestatus', randomArray)+ 'bbbbbbbbbbbbbbbbbb');
+		 if(bunny3=='true'){
+			 //bunny3=false;
+			  $('#bunny3_alivestatus').attr('alt','false');
+		 }
+		 else{
+			  console.log('bunny3 dead');
+			  $('#bunny3_alivestatus').attr('alt','false');
+			  randomArray.splice($.inArray('bunny3_alivestatus', randomArray),1);
+		 }
+		 }
+		 if((cnt%8)==0 && (($.inArray('bunny4_alivestatus', randomArray))>-1)){
+		 
+		 if(bunny4=='true'){
+			 //bunny4=false;
+			  $('#bunny4_alivestatus').attr('alt','false');
+		 }
+		 else{
+			  console.log('bunny4 dead');
+			  $('#bunny4_alivestatus').attr('alt','false');
+			   randomArray.splice($.inArray('bunny4_alivestatus', randomArray),1);
+		 }
+		}
+		  
+	   //BUNNY CASE ENDS HERE
+		 	 
+		// else if(cnt==50 && (farmer==true )&& (cow1==true || cow2==true) && (bunny1==true || bunny2==true || bunny3==true || bunny4==true)){
+			else if(cnt==50 && ($.inArray('farmer_alivestatus', randomArray)>-1) && (($.inArray('cow1_alivestatus', randomArray)>-1) || ($.inArray('cow2_alivestatus', randomArray)>-1)) && (($.inArray('bunny1_alivestatus', randomArray)>-1) || ($.inArray('bunny2_alivestatus', randomArray)>-1) || ($.inArray('bunny3_alivestatus', randomArray)>-1) || ($.inArray('bunny4_alivestatus', randomArray)>-1))){
+			 $('#countfeed').removeAttr('disabled');
+			alert('won'+  'farme= '+farmer+'  cow1  '+ cow1+'   cow2'+ cow1+'   bunny1'+bunny1+'   bunny2'+bunny2+'   bunny3'+bunny3+'   bunny4'+bunny4);   
+			$('#gamestatus').html('');
+			$('#gamestatus').html('GAME WON!');
+			}
+		 }
+		 else{
+			 $('#gamestatus').html('');
+			$('#gamestatus').html('GAME OVER!');
+		 }
+		
+	}
+	
+</script>
